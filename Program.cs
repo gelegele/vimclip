@@ -28,7 +28,21 @@ namespace vimclip
             var icon = new NotifyIcon();
             icon.Icon = new Icon("Icon.ico");
             icon.Text = "vimclip";
+            icon.ContextMenuStrip = CreateTasktrayContextMenu();
             icon.Visible = true;
+        }
+
+        /// <summary>
+        /// Create context menu on tasktray
+        /// </summary>
+        /// <returns></returns>
+        private static ContextMenuStrip CreateTasktrayContextMenu()
+        {
+            var menu = new ContextMenuStrip();
+            menu.Items.Add("Exit", null, (s, e) => {
+                Application.Exit();
+            });
+            return menu;
         }
     }
 }
