@@ -8,13 +8,20 @@ namespace vimclip
         [STAThread]
         static void Main()
         {
+            // To prevent double startup
+            Mutex mutex = new Mutex(false, "vimclip");
+            if (!mutex.WaitOne(0, false))
+            {
+                return;
+            }
+
             ApplicationConfiguration.Initialize();
             CreateTasktrayIcon();
             Application.Run(new Form1());
         }
 
         /// <summary>
-        /// 常駐アプリとしてタスクトレイアイコンを表示する
+        /// Show tasktray icon as a background app
         /// </summary>
         private static void CreateTasktrayIcon()
         {
