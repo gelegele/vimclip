@@ -8,10 +8,20 @@ namespace vimclip
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            CreateTasktrayIcon();
             Application.Run(new Form1());
+        }
+
+        /// <summary>
+        /// 常駐アプリとしてタスクトレイアイコンを表示する
+        /// </summary>
+        private static void CreateTasktrayIcon()
+        {
+            var icon = new NotifyIcon();
+            icon.Icon = new Icon("Icon.ico");
+            icon.Text = "vimclip";
+            icon.Visible = true;
         }
     }
 }
